@@ -1,16 +1,30 @@
-export default function Input({ text, placeholder, error }) {
+export default function Input({
+  label,
+  placeholder,
+  errortext,
+  name,
+  onChange,
+  type,
+}) {
   return (
-    <div>
-      <p className="font-semibold text-sm">{text}</p>
+    <div className="flex flex-col items-start gap-2 self-stretch">
+      <p className="text-[#334155] text-[14px] font-semibold">
+        {label} <span className="text-[#E14942]">*</span>
+      </p>
       <input
-        className={`
-                  focus:outline-none border rounded-lg p-3 w-[100%] ${
-                    error ? "border-[#E14942]" : "focus:border-[#0CA5E9]"
-                  }`}
-        type="text"
+        className={`text-black ${
+          type == "file" ? "h-[100px]" : ""
+        } flex p-3 items-center self-stretch rounded-lg border-[1px] border-solid ${
+          errortext ? "border-[#E14942]" : "border-[#8B8E95]"
+        }
+        focus:outline-none focus:border-[#0CA5E9]`}
         placeholder={placeholder}
+        name={name}
+        onChange={onChange}
+        type={type}
       />
-      {error && <p className="text-[#E14942] text-sm mb-[10px]"></p>}
+      <p className="text-[#E14942] text-[13px]">{errortext}</p>
+      {/* {{errortext}} */}
     </div>
   );
 }
